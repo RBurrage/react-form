@@ -1,0 +1,146 @@
+import { useState, useEffect } from "react";
+import Form from "./components/Form";
+
+function App() {
+
+  const formSchema = {
+    id: 1234,
+    //title: '',
+    //config: {},
+    fields: [
+      {
+        id: 1,
+        component: 'TextInput',
+        className: 'mb-6',
+        header: {
+          label: {
+            htmlFor: 'firstName',
+            text: "First Name",
+            className: "inline-block text-sm font-medium text-gray-700 mb-1",
+            requiredIndicator: { className: "text-red-500", icon: " *" }
+          }
+        },
+        body: {
+          element: {
+            attr: {
+              id: "firstName",
+              type: "text",
+              name: "firstName",
+              minLength: 3,
+              required: true,
+              className: "w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-blue-500 focus:border-blue-500"
+            }
+          }
+        },
+        footer: {
+          note: { text: "Note...", className: "text-gray-400 text-sm ml-2 mt-1" }
+        }
+      },
+      {
+        id: 2,
+        component: 'TextInput',
+        className: 'mb-6',
+        header: {
+          label: {
+            htmlFor: 'lastName',
+            text: "Last Name",
+            className: "inline-block text-sm font-medium text-gray-700 mb-1",
+            requiredIndicator: { className: "text-red-500", icon: " *" }
+          }
+        },
+        body: {
+          element: {
+            attr: {
+              id: "lastName",
+              type: "text",
+              name: "lastName",
+              minLength: 3,
+              required: true,
+              className: "w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-blue-500 focus:border-blue-500"
+            }
+          }
+        },
+        footer: {
+          note: { text: "Note...", className: "text-gray-400 text-sm ml-2 mt-1" }
+        }
+      },
+      {
+        id: 3,
+        component: 'TextInput',
+        className: 'mb-6',
+        header: {
+          label: {
+            htmlFor: 'email',
+            text: "Email",
+            className: "inline-block text-sm font-medium text-gray-700 mb-1",
+            requiredIndicator: { className: "text-red-500", icon: " *" }
+          }
+        },
+        body: {
+          element: {
+            attr: {
+              id: "email",
+              type: "email",
+              name: "email",
+              pattern: "[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,}",
+              minLength: 3,
+              required: true,
+              className: "w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-blue-500 focus:border-blue-500"
+            },
+            customValidity: {
+              msg: "Please enter a valid email address."
+            }
+          }
+        },
+        footer: {
+          note: { text: "Note...", className: "text-gray-400 text-sm ml-2 mt-1" }
+        }
+      },
+      {
+        id: 4,
+        component: 'Button',
+        body: {
+          element: {
+            text: "Submit Application",
+            attr: {
+              type: "submit",
+              className: "px-6 py-3 border border-transparent text-sm font-medium rounded-md text-white bg-blue-600 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 shadow-lg transition-all duration-200 transform hover:scale-105"
+            }
+          }
+        }
+      }
+    ]
+
+  }
+
+  return (
+    <div className="bg-gray-100 min-h-screen">
+      <div className="container mx-auto px-4 py-8 max-w-4xl">
+        {/* Header */}
+        <div className="text-center mb-8">
+          <h1 className="text-3xl font-bold text-blue-600 mb-2">Join Our Team </h1>
+          <p className="text-gray-600">We're excited you're considering a career with us. Please fill out this form to apply.</p>
+          <div className="mt-4 flex justify-center">
+            <div className="w-24 h-1 bg-blue-500 rounded-full"></div>
+          </div>
+        </div>
+
+        <div className="bg-white shadow-lg rounded-lg overflow-hidden p-6 md:p-8">
+
+          {/* Buttons as children -- more than 1? */}
+          {/* <Form onChange={setFormData} >
+            <div className="flex justify-between">
+              <button type="submit" className="px-6 py-3 border border-transparent text-sm font-medium rounded-md text-white bg-blue-600 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 shadow-lg transition-all duration-200 transform hover:scale-105">Submit</button>
+              <button type="submit" className="px-6 py-3 border border-transparent text-sm font-medium rounded-md text-white bg-blue-600 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 shadow-lg transition-all duration-200 transform hover:scale-105">Next</button>
+            </div> 
+          </Form>*/}
+
+          <Form schema={formSchema}></Form>
+
+        </div>
+      </div>
+    </div>
+  )
+}
+
+export default App;
