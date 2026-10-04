@@ -42,6 +42,10 @@ function App() {
                   minLength: 3,
                   required: true,
                   className: "w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-blue-500 focus:border-blue-500"
+                },
+                validate: {
+                  msg: 'Please enter a valid first name.',
+                  className: 'text-red-500 ml-1'
                 }
               }
             }
@@ -68,6 +72,10 @@ function App() {
                   minLength: 3,
                   required: true,
                   className: "w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-blue-500 focus:border-blue-500"
+                },
+                validate: {
+                  msg: 'Please enter a valid last name.',
+                  className: 'text-red-500 ml-1'
                 }
               }
             }
@@ -82,7 +90,7 @@ function App() {
             {
               id: 3,
               component: 'TextInput',
-              className: 'mb-6',
+              className: '',
               header: {
                 label: {
                   htmlFor: 'email',
@@ -103,23 +111,23 @@ function App() {
                     required: true,
                     className: "w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-blue-500 focus:border-blue-500"
                   },
-                  customValidity: {
-                    msg: "Please enter a valid email address."
+                  validate: {
+                    msg: 'Please enter a valid email.',
+                    className: 'text-red-500 ml-1'
                   }
                 }
               }
             },
-
             {
               id: 4,
               component: 'TextInput',
-              className: 'mb-6',
+              className: '',
               header: {
                 label: {
                   htmlFor: 'phone',
-                  text: "Phone",
+                  text: "Phone Number",
                   className: "inline-block text-sm font-medium text-gray-700 mb-1",
-                  requiredIndicator: { className: "", icon: "" }
+                  requiredIndicator: { className: "text-red-500", icon: " *" }
                 }
               },
               body: {
@@ -129,12 +137,13 @@ function App() {
                     type: "tel",
                     name: "phone",
                     minLength: 13,
-                    required: false,
+                    required: true,
                     placeholder: "(123)334-3333",
                     className: "w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-blue-500 focus:border-blue-500"
                   },
-                  customValidity: {
-                    msg: "Please enter a valid phone number."
+                  validate: {
+                    msg: 'Please enter a valid phone number.',
+                    className: 'text-red-500 ml-1'
                   }
                 }
               }
@@ -142,7 +151,47 @@ function App() {
           ]
       },
       {
-        id: 4,
+        id: 9,
+        component: 'Select',
+        className: 'mb-6',
+        header: {
+          label: {
+            htmlFor: 'gender',
+            text: "Gender",
+            className: "inline-block text-sm font-medium text-gray-700 mb-1",
+            requiredIndicator: { className: "text-red-500", icon: " *" }
+          }
+        },
+        body: {
+          element: {
+            attr: {
+              id: "gender",
+              name: "gender",
+              required: true,
+              className: "w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-blue-500 focus:border-blue-500"
+            },
+            options: [
+              {
+                id: 98420,
+                value: "",
+                text: "Select Gender"
+              },
+              {
+                id: 98421,
+                value: "male",
+                text: "Male"
+              },
+              {
+                id: 98423,
+                value: "female",
+                text: "Female"
+              }
+            ]
+          }
+        }
+      },
+      {
+        id: 5,
         component: 'Button',
         body: {
           element: {

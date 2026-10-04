@@ -1,6 +1,19 @@
-import React from 'react'
+import React, { useEffect, useRef, useState } from 'react'
 
-export default function TextInput({ className, header, body, footer, id }) {
+export default function TextInput({ className, header, body, footer, id, rerender }) {
+    const inputRef = useRef(null);
+    const [error, setError] = useState(null);
+
+    useEffect(() => {
+        if (rerender) validate();
+    }, [rerender]);
+
+    function validate() {
+        if (!body.element.attr.required) return false;
+
+        if (inputRef.current.checkValidity()) setError(null)
+        else setError(body.element.validate.msg)
+    }
 
     return (
         <div key={id} className={className}>
@@ -14,6 +27,8 @@ export default function TextInput({ className, header, body, footer, id }) {
                 </label>}
 
             <input {...body.element.attr}
+                onChange={validate}
+                ref={inputRef}
                 onInvalid={(e) => {
                     if (body.element.customValidity) e.target.setCustomValidity(body.element.customValidity.msg)
                 }}
@@ -24,6 +39,8 @@ export default function TextInput({ className, header, body, footer, id }) {
             {footer?.note &&
                 <div className={footer.note.className}>{footer.note.text}</div>
             }
+            {error && (<div className={body.element.validate.className}>{error}</div>
+            )}
         </div>
     )
 }

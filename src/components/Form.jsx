@@ -1,6 +1,7 @@
-import { useRef, useEffect } from 'react'
+import { useRef, useEffect, useState } from 'react'
 import TextInput from './TextInput';
 import Button from './Button';
+import Select from './Select';
 
 export default function Form(props) {
     const {
@@ -9,16 +10,25 @@ export default function Form(props) {
         formValue,
         schema,
         useUrlSearchParamsOnChange,
-        useUrlSearchParamsOnSubmit } = props
+        useUrlSearchParamsOnSubmit,
+        browserValidation } = props
     const formRef = useRef(null);
+    const [rerender, setRerender] = useState(0)
 
     const handleSubmit = (e => {
         e.preventDefault()
-        const formData = extractFormData()
 
-        if (useUrlSearchParamsOnSubmit) addSearchParamsToURL(formData.urlSearchParams)
+        if (formRef.current.checkValidity()) {
 
-        console.log('handleSubmit', formRef.current, formData)
+            const formData = extractFormData()
+
+            if (useUrlSearchParamsOnSubmit) addSearchParamsToURL(formData.urlSearchParams)
+            console.log('handleSubmit', formData)
+
+        } else {
+            setRerender(prev => prev + 1)
+        }
+
     })
 
     const handleChange = (e => {
@@ -49,8 +59,9 @@ export default function Form(props) {
     }
 
     const renderComponents = (field) => {
-        if (field.component === 'TextInput') return <TextInput key={field.id} {...field} />
+        if (field.component === 'TextInput') return <TextInput key={field.id} rerender={rerender} {...field} />
         if (field.component === 'Button') return <Button key={field.id} {...field} />
+        if (field.component === 'Select') return <Select key={field.id} {...field} />
     }
     useEffect(() => {
         if (useUrlSearchParamsOnChange || useUrlSearchParamsOnSubmit) {
@@ -65,6 +76,7 @@ export default function Form(props) {
 
     return (
         <form
+            noValidate={!browserValidation}
             ref={formRef}
             onChange={handleChange}
             onSubmit={handleSubmit}>
