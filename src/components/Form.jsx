@@ -48,6 +48,10 @@ export default function Form(props) {
         })
     }
 
+    const renderComponents = (field) => {
+        if (field.component === 'TextInput') return <TextInput key={field.id} {...field} />
+        if (field.component === 'Button') return <Button key={field.id} {...field} />
+    }
     useEffect(() => {
         if (useUrlSearchParamsOnChange || useUrlSearchParamsOnSubmit) {
             const params = new URLSearchParams(window.location.search)
@@ -66,8 +70,17 @@ export default function Form(props) {
             onSubmit={handleSubmit}>
 
             {schema.fields.map(field => {
-                if (field.component === 'TextInput') return <TextInput key={field.id} {...field} />
-                if (field.component === 'Button') return <Button key={field.id} {...field} />
+
+                if (field.grid) {
+                    return (
+                        <div key={field.id} className={field.className}>
+                            {field.grid.map(gridField => {
+                                return renderComponents(gridField)
+                            })}
+                        </div>
+                    )
+                }
+                return renderComponents(field)
             })}
 
             {/* {children} */}

@@ -3,98 +3,143 @@ import Form from "./components/Form";
 
 function App() {
 
+  const [formDataSchema, setFormDataSchema] = useState(null);
+
+  // useEffect(() => {
+  //   fetch('/form.json')
+  //     .then(res => res.json())
+  //     .then(res => setFormDataSchema(res))
+  // }, [])
+
   const formSchema = {
     id: 1234,
     //title: '',
     //config: {},
     fields: [
       {
-        id: 1,
-        component: 'TextInput',
-        className: 'mb-6',
-        header: {
-          label: {
-            htmlFor: 'firstName',
-            text: "First Name",
-            className: "inline-block text-sm font-medium text-gray-700 mb-1",
-            requiredIndicator: { className: "text-red-500", icon: " *" }
-          }
-        },
-        body: {
-          element: {
-            attr: {
-              id: "firstName",
-              type: "text",
-              name: "firstName",
-              minLength: 3,
-              required: true,
-              className: "w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-blue-500 focus:border-blue-500"
-            }
-          }
-        },
-        footer: {
-          note: { text: "Note...", className: "text-gray-400 text-sm ml-2 mt-1" }
-        }
-      },
-      {
-        id: 2,
-        component: 'TextInput',
-        className: 'mb-6',
-        header: {
-          label: {
-            htmlFor: 'lastName',
-            text: "Last Name",
-            className: "inline-block text-sm font-medium text-gray-700 mb-1",
-            requiredIndicator: { className: "text-red-500", icon: " *" }
-          }
-        },
-        body: {
-          element: {
-            attr: {
-              id: "lastName",
-              type: "text",
-              name: "lastName",
-              minLength: 3,
-              required: true,
-              className: "w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-blue-500 focus:border-blue-500"
-            }
-          }
-        },
-        footer: {
-          note: { text: "Note...", className: "text-gray-400 text-sm ml-2 mt-1" }
-        }
-      },
-      {
-        id: 3,
-        component: 'TextInput',
-        className: 'mb-6',
-        header: {
-          label: {
-            htmlFor: 'email',
-            text: "Email",
-            className: "inline-block text-sm font-medium text-gray-700 mb-1",
-            requiredIndicator: { className: "text-red-500", icon: " *" }
-          }
-        },
-        body: {
-          element: {
-            attr: {
-              id: "email",
-              type: "email",
-              name: "email",
-              pattern: "[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,}",
-              minLength: 3,
-              required: true,
-              className: "w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-blue-500 focus:border-blue-500"
+        id: 4809328,
+        className: 'grid grid-cols-1 md:grid-cols-2 gap-6 mb-6',
+        grid: [
+          {
+            id: 1,
+            component: 'TextInput',
+            className: '',
+            header: {
+              label: {
+                htmlFor: 'firstName',
+                text: "First Name",
+                className: "inline-block text-sm font-medium text-gray-700 mb-1",
+                requiredIndicator: { className: "text-red-500", icon: " *" }
+              }
             },
-            customValidity: {
-              msg: "Please enter a valid email address."
+            body: {
+              element: {
+                attr: {
+                  id: "firstName",
+                  type: "text",
+                  name: "firstName",
+                  placeholder: "John",
+                  minLength: 3,
+                  required: true,
+                  className: "w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-blue-500 focus:border-blue-500"
+                }
+              }
             }
-          }
-        },
-        footer: {
-          note: { text: "Note...", className: "text-gray-400 text-sm ml-2 mt-1" }
-        }
+          },
+          {
+            id: 2,
+            component: 'TextInput',
+            className: '',
+            header: {
+              label: {
+                htmlFor: 'lastName',
+                text: "Last Name",
+                className: "inline-block text-sm font-medium text-gray-700 mb-1",
+                requiredIndicator: { className: "text-red-500", icon: " *" }
+              }
+            },
+            body: {
+              element: {
+                attr: {
+                  id: "lastName",
+                  type: "text",
+                  name: "lastName",
+                  placeholder: "Doe",
+                  minLength: 3,
+                  required: true,
+                  className: "w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-blue-500 focus:border-blue-500"
+                }
+              }
+            }
+          },
+        ]
+      },
+      {
+        id: 903842,
+        className: 'grid grid-cols-1 md:grid-cols-2 gap-6 mb-6',
+        grid:
+          [
+            {
+              id: 3,
+              component: 'TextInput',
+              className: 'mb-6',
+              header: {
+                label: {
+                  htmlFor: 'email',
+                  text: "Email",
+                  className: "inline-block text-sm font-medium text-gray-700 mb-1",
+                  requiredIndicator: { className: "text-red-500", icon: " *" }
+                }
+              },
+              body: {
+                element: {
+                  attr: {
+                    id: "email",
+                    type: "email",
+                    name: "email",
+                    placeholder: "johndoe@email.com",
+                    pattern: "[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,}",
+                    minLength: 3,
+                    required: true,
+                    className: "w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-blue-500 focus:border-blue-500"
+                  },
+                  customValidity: {
+                    msg: "Please enter a valid email address."
+                  }
+                }
+              }
+            },
+
+            {
+              id: 4,
+              component: 'TextInput',
+              className: 'mb-6',
+              header: {
+                label: {
+                  htmlFor: 'phone',
+                  text: "Phone",
+                  className: "inline-block text-sm font-medium text-gray-700 mb-1",
+                  requiredIndicator: { className: "", icon: "" }
+                }
+              },
+              body: {
+                element: {
+                  attr: {
+                    id: "phone",
+                    type: "tel",
+                    name: "phone",
+                    minLength: 13,
+                    required: false,
+                    placeholder: "(123)334-3333",
+                    className: "w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-blue-500 focus:border-blue-500"
+                  },
+                  customValidity: {
+                    msg: "Please enter a valid phone number."
+                  }
+                }
+              }
+            },
+          ]
       },
       {
         id: 4,
